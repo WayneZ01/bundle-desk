@@ -1,0 +1,16 @@
+.runtime-cache/
+__pycache__/
+*.pyc
+.DS_Store
+dist/
+runtime/
+# Local project references may contain credentials. Never publish them.
+aab 包自动化解包 apks 并安装到手机上/
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.secret
+.env
+.env.*
+.codex/

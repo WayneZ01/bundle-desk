@@ -1,0 +1,21 @@
+name: Windows portable build
+on:
+  workflow_dispatch:
+  push:
+    paths: ['app/**', 'windows/**', 'scripts/build-windows.py', 'tests/**', '.github/workflows/windows.yml']
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build portable distribution
+        run: python scripts/build-windows.py
+      - name: Run real Windows conversion smoke test
+        run: python tests/windows-smoke.py 'dist/Bundle Desk Windows x64'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Bundle-Desk-Windows-x64
+          path: dist/Bundle Desk Windows x64.zip

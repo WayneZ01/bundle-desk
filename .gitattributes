@@ -1,0 +1,11 @@
+* text=auto
+*.cmd text eol=crlf
+*.sh text eol=lf
+*.command text eol=lf
+*.py text eol=lf
+*.swift text eol=lf
+*.jar binary
+*.png binary
+*.ico binary
+*.icns binary
+*.aab binary
