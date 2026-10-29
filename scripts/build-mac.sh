@@ -19,7 +19,7 @@ cp -R app/web "$APP/Contents/Resources/app/"
 cat > "$APP/Contents/Info.plist" <<'PLIST'
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0"><dict><key>CFBundleExecutable</key><string>BundleDesk</string><key>CFBundleIdentifier</key><string>local.bundledesk.app</string><key>CFBundleIconFile</key><string>BundleDesk</string><key>CFBundleName</key><string>Bundle Desk</string><key>CFBundleVersion</key><string>2</string><key>CFBundleShortVersionString</key><string>1.0.1</string><key>LSMinimumSystemVersion</key><string>12.0</string><key>NSHighResolutionCapable</key><true/><key>NSAppTransportSecurity</key><dict><key>NSAllowsLocalNetworking</key><true/></dict></dict></plist>
+<plist version="1.0"><dict><key>CFBundleExecutable</key><string>BundleDesk</string><key>CFBundleIdentifier</key><string>com.wayne.bundledesk</string><key>CFBundleIconFile</key><string>BundleDesk</string><key>CFBundleName</key><string>Bundle Desk</string><key>CFBundleVersion</key><string>2</string><key>CFBundleShortVersionString</key><string>1.0.1</string><key>LSMinimumSystemVersion</key><string>12.0</string><key>NSHighResolutionCapable</key><true/><key>NSAppTransportSecurity</key><dict><key>NSAllowsLocalNetworking</key><true/></dict></dict></plist>
 PLIST
 codesign --force --deep --sign - "$APP"
 printf '已生成：%s\n' "$APP"

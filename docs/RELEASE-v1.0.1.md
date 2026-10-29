@@ -22,9 +22,9 @@
 
 | 平台 | 文件 | 说明 |
 | --- | --- | --- |
-| macOS 12+ · Apple Silicon | `Bundle-Desk-v1.0.1-macos-arm64.zip` | 原生窗口，**已验证可用** |
-| macOS 12+ · Apple Silicon | `Bundle-Desk-v1.0.1-html-macos-arm64.zip` | 本地浏览器界面，**已验证可用** |
-| Windows 10/11 · x64 | `Bundle-Desk-v1.0.1-windows-x64.zip` | 浏览器便携版，等待 Windows 实机反馈 |
+| macOS 12+ · Apple Silicon | [Bundle-Desk-v1.0.1-macos-arm64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-macos-arm64.zip) | 原生窗口，**已验证可用** |
+| macOS 12+ · Apple Silicon | [Bundle-Desk-v1.0.1-html-macos-arm64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-html-macos-arm64.zip) | 本地浏览器界面，**已验证可用** |
+| Windows 10/11 · x64 | [Bundle-Desk-v1.0.1-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-windows-x64.zip) | 浏览器便携版，等待 Windows 实机反馈 |
 
 完整解压后使用；Mac HTML 版双击 `启动 HTML 版.command`，Windows 双击 `Start-BundleDesk.cmd`。运行时均随包提供，无需安装 Android Studio、Java 或 Python。`SHA256SUMS.txt` 用于核对附件完整性。
 
