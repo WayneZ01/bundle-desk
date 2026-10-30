@@ -48,6 +48,9 @@ def build():
      target.write_bytes(z.read(n))
  for source in (ROOT/'windows').iterdir():
   if source.is_file():shutil.copy2(source,out/source.name)
+ for name in ['LICENSE','THIRD_PARTY_NOTICES.md']:
+  if (ROOT/name).exists():shutil.copy2(ROOT/name,out/name)
+ if (ROOT/'docs/legal').exists():shutil.copytree(ROOT/'docs/legal',out/'docs/legal')
  icon=ROOT/'mac/assets/BundleDesk.ico'
  if icon.exists():shutil.copy2(icon,out/'BundleDesk.ico')
  (out/'runtime-sources.json').write_text(json.dumps(manifest,indent=2),encoding='utf-8')
@@ -58,5 +61,10 @@ def build():
  with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
   for path in out.rglob('*'):
    if path.is_file():z.write(path,str(path.relative_to(out.parent)))
+ html_archive=ROOT/'dist/Bundle Desk HTML Windows x64.zip'
+ with zipfile.ZipFile(html_archive,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+  for path in out.rglob('*'):
+   if path.is_file():z.write(path,str(Path('Bundle Desk HTML Windows x64')/path.relative_to(out)))
  print('Windows portable package:',archive)
+ print('Windows HTML local package:',html_archive)
 if __name__=='__main__':build()

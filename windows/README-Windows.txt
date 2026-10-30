@@ -1,7 +1,7 @@
 Bundle Desk for Windows 10/11 x64
 ================================
 1. Extract the COMPLETE ZIP into a normal folder (do not run inside ZIP preview).
-2. Double-click Start-BundleDesk.cmd. Your default browser opens the local tool.
+2. Double-click the HTML .cmd launcher, or Start-BundleDesk.cmd. Your default browser opens the local tool.
 3. Keep the command window open. Close it or press Ctrl+C when finished.
 
 Python, Java, bundletool, apksigner, ADB, aapt and required tool DLLs are included.

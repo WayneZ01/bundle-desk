@@ -64,9 +64,9 @@ HTML 版应同时复制 `app/`、对应 `runtime/` 和根目录的启动 `.comma
 python3 scripts/build-windows.py
 ```
 
-产物：`dist/Bundle Desk Windows x64.zip`，包含 Python embeddable、Java 17 JRE、ADB、aapt、相关 DLL、界面及 Java 工具。来源和 SHA-256 位于包内 `runtime-sources.json`。
+产物：`dist/Bundle Desk Windows x64.zip` 和 `dist/Bundle Desk HTML Windows x64.zip`，包含 Python embeddable、Java 17 JRE、ADB、aapt、相关 DLL、界面及 Java 工具。来源和 SHA-256 位于包内 `runtime-sources.json`。
 
-当前 Windows 运行时布局为 `runtime/windows-x86_64/{python,jre,tools}`。启动器使用相对目录，不依赖打包机路径。
+当前 Windows 运行时布局为 `runtime/windows-x86_64/{python,jre,tools}`。Windows HTML 本地版提供 `启动 HTML 版.cmd`，调用同目录的 `Start-BundleDesk.cmd`；两个 ZIP 共用同一套代码和依赖。启动器使用相对目录，不依赖打包机路径。
 
 ## 验证
 
@@ -94,3 +94,15 @@ python tests/windows-smoke.py 'dist/Bundle Desk Windows x64'
 3. 构建并完整解压校验各平台 ZIP，Mac 校验代码签名，Windows 在 Windows runner 运行 smoke test。
 4. 在 `main` 的对应提交创建版本标签，通过 GitHub Releases 上传安装包、源代码归档和 `SHA256SUMS.txt`。
 5. 发布说明只列出真实功能与实际验证情况，不把未提供的平台列为可下载。
+
+### Windows EXE 应用
+
+在 Windows 打包机（或本仓库 Windows Actions runner）运行：
+
+```powershell
+python scripts/build-windows-native.py
+```
+
+打包机需 .NET 8 SDK；使用者不需要安装 .NET。脚本使用 self-contained 发布 Windows Forms + WebView2 原生窗口，下载微软官方 Fixed Version WebView2 CAB 并随包附带。产物为 `dist/Bundle Desk EXE Windows x64.zip`，通过 `BundleDesk.exe` 启动，和 HTML 版共享本地服务、数据目录及默认测试签名。Fixed WebView2 需要随应用升级，不自动更新。Windows 10 按微软要求，仅给随包浏览器二进制目录授予 AppContainer 读取/执行权限；不修改签名或上传数据目录权限。
+
+CI 额外启动实际打包的 `BundleDesk.exe --smoke-test`，验证固定浏览器运行时、服务地址、页面和四项内置工具就绪，关闭后清理子进程。此检查不替代真实手机安装验证。

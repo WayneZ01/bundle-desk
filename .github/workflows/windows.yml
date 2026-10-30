@@ -2,7 +2,7 @@ name: Windows portable build
 on:
   workflow_dispatch:
   push:
-    paths: ['app/**', 'windows/**', 'scripts/build-windows.py', 'tests/**', '.github/workflows/windows.yml']
+    paths: ['app/**', 'windows/**', 'scripts/build-windows*.py', 'tests/**', '.github/workflows/windows.yml']
 jobs:
   windows:
     runs-on: windows-latest
@@ -11,11 +11,33 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
       - name: Build portable distribution
         run: python scripts/build-windows.py
       - name: Run real Windows conversion smoke test
         run: python tests/windows-smoke.py 'dist/Bundle Desk Windows x64'
+      - name: Build self-contained native EXE
+        run: python scripts/build-windows-native.py --skip-base
+      - name: Test packaged native EXE and fixed WebView2
+        shell: pwsh
+        run: |
+          $env:AAB_WORKBENCH_DATA = Join-Path $env:RUNNER_TEMP 'bundledesk-native-data'
+          $app = Resolve-Path 'dist/Bundle Desk EXE Windows x64/BundleDesk.exe'
+          $p = Start-Process $app -ArgumentList '--smoke-test' -PassThru
+          if (-not $p.WaitForExit(120000)) { Stop-Process -Id $p.Id -Force; throw 'Native EXE smoke test timed out' }
+          $proof = Join-Path $env:LOCALAPPDATA 'Bundle Desk/desktop-smoke.json'
+          $log = Join-Path $env:LOCALAPPDATA 'Bundle Desk/desktop.log'
+          if (Test-Path $log) { Get-Content $log }
+          if ($p.ExitCode -ne 0 -or -not (Test-Path $proof)) { throw 'Native EXE failed to initialize' }
+          Get-Content $proof
+          $result = Get-Content $proof | ConvertFrom-Json
+          if (-not $result.success -or -not $result.fixedRuntime.StartsWith('156.')) { throw 'Fixed runtime validation failed' }
       - uses: actions/upload-artifact@v4
         with:
           name: Bundle-Desk-Windows-x64
-          path: dist/Bundle Desk Windows x64.zip
+          path: |
+            dist/Bundle Desk Windows x64.zip
+            dist/Bundle Desk HTML Windows x64.zip
+            dist/Bundle Desk EXE Windows x64.zip

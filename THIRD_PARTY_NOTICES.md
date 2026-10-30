@@ -15,3 +15,5 @@ Bundle Desk 自有源码为 MIT；本文件列出的第三方组件保留原许�
 运行时不提交到 Git。首次 Release 的运行时来源及实际版本与构建脚本后续下载版本可能不同，请以具体 Release 说明、发行包内 LICENSE/NOTICE 及 runtime-sources.json 为准。
 
 应用图标和界面由本项目生成，按自有源码许可证提供。README 徽章由 shields.io 提供，显示仓库的实际发布状态。
+
+Windows EXE 版额外使用 Microsoft .NET 8（MIT，保留发行许可）与 Microsoft.Web.WebView2 SDK / Fixed Version Runtime（微软分发许可，保留包内许可及第三方声明）。官方说明：[WebView2 分发](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution)。HTML 版不附带此浏览器运行时。

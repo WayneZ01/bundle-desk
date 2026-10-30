@@ -14,3 +14,6 @@ aab 包自动化解包 apks 并安装到手机上/
 .env
 .env.*
 .codex/
+
+windows/native/bin/
+windows/native/obj/

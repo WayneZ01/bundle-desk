@@ -45,9 +45,10 @@ Bundle Desk 将这条流程整理成一个本地界面。选择文件、按需�
 | --- | --- | --- | --- |
 | [Bundle-Desk-v1.0.1-macos-arm64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-macos-arm64.zip) | macOS 12+ · Apple Silicon | 打开 `Bundle Desk.app` | **已验证可用** |
 | [Bundle-Desk-v1.0.1-html-macos-arm64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-html-macos-arm64.zip) | macOS 12+ · Apple Silicon | 双击 `启动 HTML 版.command` | **已验证可用** |
-| [Bundle-Desk-v1.0.1-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-windows-x64.zip) | Windows 10/11 · x64 | 双击 `Start-BundleDesk.cmd` | 已通过 Windows CI 转换测试；真机安装待反馈 |
+| [Bundle-Desk-v1.0.1-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-windows-x64.zip) | Windows 10/11 · x64 | 双击 `BundleDesk.exe`（独立窗口） | 已通过 Windows CI 转换测试；真机安装待反馈 |
+| [Bundle-Desk-v1.0.1-html-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-html-windows-x64.zip) | Windows 10/11 · x64 | 双击 `启动 HTML 版.cmd` | 系统浏览器＋本地服务 |
 
-Mac 应用版使用原生窗口；HTML 版和 Windows 便携版使用默认浏览器与本地服务。HTML 版不能只复制 `index.html` 使用。当前没有 Intel Mac 发行包、Windows ARM64 发行包、安装器或自动更新功能。
+Mac 应用版和 Windows EXE 版使用独立应用窗口；两种 HTML 本地版使用默认浏览器与本地服务。HTML 版不能只复制 `index.html` 使用。当前没有 Intel Mac 发行包、Windows ARM64 发行包、安装器或自动更新功能。Windows EXE 是解压即用的应用，可执行文件及同包依赖需要一起保留；它尚未进行 Windows 代码签名。
 
 Mac 应用当前采用 ad-hoc 签名，尚未使用 Apple Developer ID 公证；它与 Android APK 的签名是两回事。下载后请按系统的正常应用打开流程操作。
 
@@ -59,7 +60,9 @@ Mac 应用当前采用 ad-hoc 签名，尚未使用 Apple Developer ID 公证；
 
 **macOS HTML 版**：完整解压，双击 `启动 HTML 版.command`，浏览器自动打开工作台；使用期间保持启动终端开启。
 
-**Windows 版**：完整解压，双击 `Start-BundleDesk.cmd`，浏览器自动打开工作台。使用期间保留启动窗口，完成后关闭或按 Ctrl+C。可运行 `Create-Desktop-Shortcut.cmd` 创建带图标的桌面快捷方式。
+**Windows EXE 应用版**：完整解压 `Bundle-Desk-v1.0.1-windows-x64.zip`，双击 `BundleDesk.exe`，在独立窗口中使用；关闭窗口会停止它管理的本地服务。内置 .NET、Fixed WebView2、Python、Java 与 Android 工具，无需自行安装运行时。可运行 `Create-Desktop-Shortcut.cmd` 创建带图标的桌面快捷方式。
+
+**Windows HTML 本地版**：完整解压 `Bundle-Desk-v1.0.1-html-windows-x64.zip`，双击 `启动 HTML 版.cmd`（原 `Start-BundleDesk.cmd` 也可），在默认浏览器中使用；使用期间保持启动窗口开启。该包内置服务与转换工具，使用电脑的系统浏览器，不包含 EXE 版的桌面窗口及 Fixed WebView2。
 
 不要在压缩包预览中启动，也不要单独移动启动文件。工具通过本地随机端口运行，完整依赖必须与启动器一起保留。
 
@@ -147,7 +150,7 @@ AAB 的部分属性是资源引用，转换后才能进一步解析。仅提供 
 <details>
 <summary>是否支持 Linux、Intel Mac 或 Windows 原生窗口？</summary>
 
-当前发布包仅包括 macOS Apple Silicon 和 Windows x64。Python 核心可继续适配其他平台，但未提供对应完整发行包。Windows 当前是浏览器界面的便携版。
+当前发布包包括 macOS Apple Silicon 和 Windows x64；Windows 同时提供独立 EXE 窗口与 HTML 本地版。Linux、Intel Mac、Windows ARM64 暂无完整发行包。
 </details>
 
 ## 开发、测试与贡献

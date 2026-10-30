@@ -12,6 +12,12 @@
 - **本地处理**：内置运行工具，保留执行日志，可保存 APKS、清理会话文件。
 - **应用图标**：Mac Finder/Dock 图标与 Windows 快捷方式图标。
 
+## v1.0.1 补充（2026-10-30）
+
+- 补齐 Windows 独立 EXE 应用（`BundleDesk.exe`，内置 .NET 与 Fixed WebView2）以及 HTML 本地版独立下载包。
+- Windows EXE 版在独立窗口中使用，HTML 版通过 `启动 HTML 版.cmd` 或原 `Start-BundleDesk.cmd` 在系统浏览器中使用。
+- 本次为首版补充，仍使用 v1.0.1，不新增版本；受影响附件的 SHA-256 已更新。
+
 ## 修复与改进
 
 - 显示文件导入状态及具体失败原因，操作前重试已选择但未成功导入的文件。
@@ -24,9 +30,10 @@
 | --- | --- | --- |
 | macOS 12+ · Apple Silicon | [Bundle-Desk-v1.0.1-macos-arm64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-macos-arm64.zip) | 原生窗口，**已验证可用** |
 | macOS 12+ · Apple Silicon | [Bundle-Desk-v1.0.1-html-macos-arm64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-html-macos-arm64.zip) | 本地浏览器界面，**已验证可用** |
-| Windows 10/11 · x64 | [Bundle-Desk-v1.0.1-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-windows-x64.zip) | 浏览器便携版，已通过 Windows CI 转换测试；真机安装待反馈 |
+| Windows 10/11 · x64 | [Bundle-Desk-v1.0.1-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-windows-x64.zip) | EXE 独立窗口，双击 `BundleDesk.exe`；真机安装待反馈 |
+| Windows 10/11 · x64 · HTML 本地版 | [Bundle-Desk-v1.0.1-html-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-html-windows-x64.zip) | 双击 `启动 HTML 版.cmd`，使用系统浏览器 |
 
-完整解压后使用；Mac HTML 版双击 `启动 HTML 版.command`，Windows 双击 `Start-BundleDesk.cmd`。运行时均随包提供，无需安装 Android Studio、Java 或 Python。`SHA256SUMS.txt` 用于核对附件完整性。
+完整解压后使用；Mac HTML 版双击 `启动 HTML 版.command`，Windows EXE 版双击 `BundleDesk.exe`，Windows HTML 版双击 `启动 HTML 版.cmd`。运行时均随包提供，无需安装 Android Studio、Java 或 Python；EXE 版额外内置 .NET 与 Fixed WebView2。`SHA256SUMS.txt` 用于核对附件完整性。
 
 Mac 包采用 ad-hoc 签名，未做 Developer ID 公证。当前不提供 Intel Mac、Windows ARM64、安装器、自动更新或模拟器系统镜像。
 

@@ -1,6 +1,7 @@
 Bundle Desk · Windows 10 / 11 x64 便携版
 
-完整解压 ZIP 后，双击 Start-BundleDesk.cmd。
+完整解压 ZIP 后，双击“启动 HTML 版.cmd”启动 Windows HTML 本地版。
+原 Start-BundleDesk.cmd 入口同样可用；两者运行同一套本地浏览器界面。
 界面会在默认浏览器中打开；使用期间保留黑色启动窗口，退出时关闭窗口即可。
 不要在压缩包预览中直接运行，也不要只复制启动文件。
 
