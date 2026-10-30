@@ -24,7 +24,7 @@
 | --- | --- | --- |
 | macOS 12+ · Apple Silicon | [Bundle-Desk-v1.0.1-macos-arm64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-macos-arm64.zip) | 原生窗口，**已验证可用** |
 | macOS 12+ · Apple Silicon | [Bundle-Desk-v1.0.1-html-macos-arm64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-html-macos-arm64.zip) | 本地浏览器界面，**已验证可用** |
-| Windows 10/11 · x64 | [Bundle-Desk-v1.0.1-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-windows-x64.zip) | 浏览器便携版，等待 Windows 实机反馈 |
+| Windows 10/11 · x64 | [Bundle-Desk-v1.0.1-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-windows-x64.zip) | 浏览器便携版，已通过 Windows CI 转换测试；真机安装待反馈 |
 
 完整解压后使用；Mac HTML 版双击 `启动 HTML 版.command`，Windows 双击 `Start-BundleDesk.cmd`。运行时均随包提供，无需安装 Android Studio、Java 或 Python。`SHA256SUMS.txt` 用于核对附件完整性。
 
@@ -41,4 +41,4 @@ Mac 数据：`~/Library/Application Support/AAB Workbench`；Windows 数据：`%
 - macOS Apple Silicon：已验证可用。
 - 已通过真实 bundletool 转换、无自定义签名解析/构建、签名保留及 APK 信息解析回归。
 - 已通过文件导入状态恢复、Windows 工具路径和 ZIP 完整性检查。
-- Windows 提供 CI smoke test；不把 Mac 回归或静态校验等同于 Windows 真机安装验证。
+- Windows 已通过 GitHub Actions runner 的构建、内置工具启动、HTTP 文件上传、AAB 解析与默认签名 APKS 转换测试；真机安装待反馈。
