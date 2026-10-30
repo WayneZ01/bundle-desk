@@ -45,7 +45,7 @@ Bundle Desk 将这条流程整理成一个本地界面。选择文件、按需�
 | --- | --- | --- | --- |
 | [Bundle-Desk-v1.0.1-macos-arm64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-macos-arm64.zip) | macOS 12+ · Apple Silicon | 打开 `Bundle Desk.app` | **已验证可用** |
 | [Bundle-Desk-v1.0.1-html-macos-arm64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-html-macos-arm64.zip) | macOS 12+ · Apple Silicon | 双击 `启动 HTML 版.command` | **已验证可用** |
-| [Bundle-Desk-v1.0.1-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-windows-x64.zip) | Windows 10/11 · x64 | 双击 `BundleDesk.exe`（独立窗口） | 已通过 Windows CI 转换测试；真机安装待反馈 |
+| [Bundle-Desk-v1.0.1-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-windows-x64.zip) | Windows 10/11 · x64 | 双击 `BundleDesk.exe`（独立窗口） | 已通过 Windows CI 构建、启动和转换测试；真机安装待反馈 |
 | [Bundle-Desk-v1.0.1-html-windows-x64.zip](https://github.com/WayneZ01/bundle-desk/releases/download/v1.0.1/Bundle-Desk-v1.0.1-html-windows-x64.zip) | Windows 10/11 · x64 | 双击 `启动 HTML 版.cmd` | 系统浏览器＋本地服务 |
 
 Mac 应用版和 Windows EXE 版使用独立应用窗口；两种 HTML 本地版使用默认浏览器与本地服务。HTML 版不能只复制 `index.html` 使用。当前没有 Intel Mac 发行包、Windows ARM64 发行包、安装器或自动更新功能。Windows EXE 是解压即用的应用，可执行文件及同包依赖需要一起保留；它尚未进行 Windows 代码签名。

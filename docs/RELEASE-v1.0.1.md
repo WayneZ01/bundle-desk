@@ -48,4 +48,5 @@ Mac 数据：`~/Library/Application Support/AAB Workbench`；Windows 数据：`%
 - macOS Apple Silicon：已验证可用。
 - 已通过真实 bundletool 转换、无自定义签名解析/构建、签名保留及 APK 信息解析回归。
 - 已通过文件导入状态恢复、Windows 工具路径和 ZIP 完整性检查。
-- Windows 已通过 GitHub Actions runner 的构建、内置工具启动、HTTP 文件上传、AAB 解析与默认签名 APKS 转换测试；真机安装待反馈。
+- Windows 已通过 GitHub Actions runner 的构建、内置工具启动、HTTP 文件上传、AAB 解析与默认签名 APKS 转换测试；新增 EXE 也通过了实际独立窗口、内置 Fixed WebView2 和页面加载测试。真机安装待反馈。
+- [Windows EXE 与 HTML 构建测试记录](https://github.com/WayneZ01/bundle-desk/actions/runs/40992894987)

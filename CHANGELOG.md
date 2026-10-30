@@ -27,5 +27,5 @@
 ### 平台状态
 
 - macOS Apple Silicon：已验证可用。
-- Windows x64：已通过 GitHub Actions Windows runner 的构建与真实工具转换 smoke test；真机安装等待反馈。
+- Windows x64：已通过 GitHub Actions Windows runner 的构建、真实工具转换及 EXE 独立窗口/Fixed WebView2 启动测试；真机安装等待反馈。
 - Intel Mac / Windows ARM64：未提供发行包。
