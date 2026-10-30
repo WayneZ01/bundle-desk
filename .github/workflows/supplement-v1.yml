@@ -1,0 +1,89 @@
+name: Supplement existing v1.0.1 assets
+on:
+  workflow_dispatch:
+    inputs:
+      source_run:
+        description: Successful Windows portable build run ID
+        required: true
+        type: string
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: supplement-existing-v1
+  cancel-in-progress: false
+jobs:
+  supplement:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_RUN: ${{ inputs.source_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require a successful build from this repository
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$SOURCE_RUN" > /tmp/source-run.json
+          python3 - <<'PY'
+          import json,os
+          run=json.load(open('/tmp/source-run.json'))
+          assert run['conclusion']=='success',run['conclusion']
+          assert run['head_repository']['full_name']==os.environ['GITHUB_REPOSITORY']
+          assert run['head_branch']=='main'
+          assert run['name']=='Windows portable build'
+          PY
+          gh release view v1.0.1 --repo "$GITHUB_REPOSITORY"
+      - name: Download tested Windows packages
+        run: gh run download "$SOURCE_RUN" --repo "$GITHUB_REPOSITORY" --name Bundle-Desk-Windows-x64 --dir artifacts
+      - name: Validate and prepare both Windows editions
+        run: |
+          mkdir release
+          python3 - <<'PY'
+          import hashlib,shutil,zipfile
+          from pathlib import Path
+          native=Path('artifacts/Bundle Desk EXE Windows x64.zip')
+          html=Path('artifacts/Bundle Desk HTML Windows x64.zip')
+          for archive in [native,html]:
+              with zipfile.ZipFile(archive) as z:
+                  assert z.testzip() is None
+                  names=z.namelist()
+                  assert any(n.endswith('/启动 HTML 版.cmd') for n in names)
+                  assert not any(n.endswith(('.jks','.keystore','.secret')) for n in names)
+                  launch=[n for n in names if n.endswith('/BundleDesk.exe')]
+                  if archive==native:
+                      assert len(launch)==1
+                      with z.open(launch[0]) as exe: assert exe.read(2)==b'MZ'
+                      assert any(n.endswith('/runtime/webview2/msedgewebview2.exe') for n in names)
+                  else: assert not launch
+          shutil.copy2(native,'release/Bundle-Desk-v1.0.1-windows-x64.zip')
+          shutil.copy2(html,'release/Bundle-Desk-v1.0.1-html-windows-x64.zip')
+          PY
+          gh release download v1.0.1 --repo "$GITHUB_REPOSITORY" --pattern SHA256SUMS.txt --dir release
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          p=Path('release/SHA256SUMS.txt')
+          sums={name:sha for sha,name in (line.split(None,1) for line in p.read_text().splitlines())}
+          for archive in Path('release').glob('*.zip'):
+              h=hashlib.sha256()
+              with archive.open('rb') as f:
+                  for block in iter(lambda:f.read(1024*1024),b''): h.update(block)
+              sums[archive.name]=h.hexdigest()
+          p.write_text(''.join(f'{sha}  {name}\n' for name,sha in sorted(sums.items())))
+          PY
+      - name: Supplement existing release, never create another release
+        run: |
+          gh release upload v1.0.1 release/*.zip release/SHA256SUMS.txt --repo "$GITHUB_REPOSITORY" --clobber
+          gh release edit v1.0.1 --repo "$GITHUB_REPOSITORY" --notes-file docs/RELEASE-v1.0.1.md
+          gh api "repos/$GITHUB_REPOSITORY/releases/tags/v1.0.1" > /tmp/release.json
+          python3 - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          release=json.load(open('/tmp/release.json'));assert not release['draft']
+          assets={a['name']:a for a in release['assets']}
+          for p in Path('release').iterdir():
+              h=hashlib.sha256()
+              with p.open('rb') as f:
+                  for block in iter(lambda:f.read(1024*1024),b''): h.update(block)
+              assert assets[p.name]['digest']=='sha256:'+h.hexdigest(),p.name
+          print('Existing v1.0.1 supplemented; uploaded assets match SHA-256.')
+          PY

@@ -2,6 +2,7 @@ name: Windows portable build
 on:
   workflow_dispatch:
   push:
+    branches: [main]
     paths: ['app/**', 'windows/**', 'scripts/build-windows*.py', 'tests/**', '.github/workflows/windows.yml']
 jobs:
   windows:
